@@ -1,0 +1,137 @@
+---
+title: Getting started with R
+subtitle: Exercises for Day 1
+author: Your name
+date: '2025-11-26'
+format: html
+embed-resources: true
+---
+
+## Setting up a new project
+
+### Create a new project for exercises
+
+::: callout-note
+### Note
+
+This project will be used for this the exercise only. Give it a name to reflect this. Remember the conventions for naming style.
+
+```{=html}
+<!--- Create a new quarto document, give it an appropriate title and save the file.
+  - Remember that titles should be written in "plain english" and the file should be saved with file name conventions (*e.g.,* `plain_english.qmd`). -->
+```
+
+I strongly recommend not using an LLM for this exercise. Figuring this out on your own is one of the most critical lessons for the day.
+:::
+
+### Set up
+
+For this exercise we will need two packages: `tidyverse` and `nycflights13`. Load the two packages. What is different between loading tidyverse and nycflights13?
+
+Remember the importance of documentation: use hash symbols to create a section in the .qmd file, use code chunks, document your work.
+
+The nycflights13 package will quietly (in the background, not visible in your Environment) load a data object called "flights". Use one of the functions we have learned today to view the flights data.
+
+```{r}
+install.packages(['tidyverse','nycflights13'])
+```
+
+## Exploratory analysis
+
+> A very common situations you will find yourself in research: You get some data - you don't know what format it is, what it's meant to look like, you don't yet know what questions you can ask of this data.
+
+Use functions we have encountered today to answer the following questions:
+
+### How much data is in `flights`?
+
+How would you measure data in a table?
+
+```{r}
+# Write answer here
+```
+
+### What type of data is stored?
+
+Look at the column names of the data (`colnames()`). What do `dep_time`, `arr_time`, and `air_time` mean? With these three variables we can carry out a simple but important test - can you identify what that test is?
+
+- We can perform a similarly important test using just `dep_time` and `arr_time`.
+
+\
+
+### Hypothesis generation
+
+Given the data variables in flights, propose two hypotheses that we could test with this dataset.
+
+## Exploring values and distributions of numerical variables
+
+### Explore categorical variables
+
+Instead of passing all the data in an object to a function we can specify a single variable with `$`. Use `flights$variable_name` to pass a single variable to a function.
+
+*e.g.,*
+
+```{r}
+flights$carrier |> unique()
+```
+
+Use the functions `unique()` and `n_distinct()` to answer:
+
+### What are the locations flights are leaving from?
+
+```{r}
+# Write answer here
+```
+
+### How many destinations are these flights leaving for?
+
+```{r}
+# Write answer here
+```
+
+### Use functions `range()`, `mean()`, `median()` to gauge the level of departure delays
+
+::: callout-note
+### Note
+
+We will need to add `na.rm = TRUE` as an argument within `range()`, `mean()`, and `median()`.
+
+If we do not pass `na.rm = TRUE`as an argument the functions will detect the presence of NAs in the data and return NA.
+:::
+
+```{r}
+# Write answer here
+```
+
+## Exploratory analysis with `ggplot`
+
+### Use `ggplot` to look at associations between two variables.
+
+```{r}
+# Write answer here
+```
+
+### Can you use ggplot to test the hypotheses **you** generated above?
+
+::: callout-note
+### My hypothesis
+
+Here's a plot to test my hypothesis. Can you identify my hypothesis?
+
+```{r}
+ggplot(flights,
+       aes(x = dep_time,
+           y = dep_delay)) +
+  geom_point()
+```
+:::
+
+### Extra message
+
+Depending on your choice of variables your plot (and the plot above) may produce a message that looks like this:
+
+```         
+Warning: Removed 8255 rows containing missing values or values outside the scale range
+(`geom_point()`).
+```
+
+What type of message is this? What does this message mean? What steps, if any, do you recommend taking in response?
